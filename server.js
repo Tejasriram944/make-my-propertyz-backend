@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { readdirSync, access } = require('fs');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
+const { readdirSync } = require('fs');
+// const multer = require('multer');
+// const multerS3 = require('multer-s3');
 // var fs = require('fs');
 const cors = require('cors');
-const AWS = require('aws-sdk')
+// const AWS = require('aws-sdk')
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 require('dotenv').config();
 
