@@ -71,7 +71,7 @@ exports.createPropertyDetails = async (req, res) => {
       builtupVal,
       iAm,
       "isDraft":true,
-      // "verifiedByMMP": verifiedByMMP ? verifiedByMMP : false,
+      "verifiedByMMP": verifiedByMMP === true ? verifiedByMMP : false,
     });
 
     await property.save();
