@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { sendMailCustom } = require("../helpers/helper");
 const { OAuth2Client } = require("google-auth-library");
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID_PROD);
 
 exports.signup = async (req, res) => {
   try {
@@ -192,7 +192,7 @@ exports.googleLogin = async (req, res) => {
 
   try {
     await client
-      .verifyIdToken({ idToken, audience: GOOGLE_CLIENT_ID })
+      .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT_ID_PROD })
       .then(async(response) => {
         const { email_verified, username, email, picture } = response.payload;
         if (email_verified) {
