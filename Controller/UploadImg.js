@@ -12,7 +12,7 @@ const s3 = new AWS.S3({
     region: process.env.REGION,
   });
   
-  // Multer configuration for S3
+  // Multer configuration for S3git stt
   const upload = multer({
       storage: multerS3({
           s3: s3,
