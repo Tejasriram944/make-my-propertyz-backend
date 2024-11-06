@@ -5,23 +5,18 @@ const cors = require('cors');
 const AWS = require('aws-sdk')
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 
-const bucketName = 'mmp-upload';
-const REGION = "ap-south-1";
-const newFileKey = 'file.jpg'
-const filePath = './uploads/test.jpg'
-
 // Configure AWS S3
 const s3 = new AWS.S3({
-    accessKeyId: "AKIAXTORPZNUUHTHTDUK",
-    secretAccessKey: "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",
-    region: REGION,
+    accessKeyId: process.env.ACCESS_KEY,
+    secretAccessKey: process.env.SECRET_ACCESSKEY,
+    region: process.env.REGION,
   });
   
   // Multer configuration for S3
   const upload = multer({
       storage: multerS3({
           s3: s3,
-          bucket: bucketName,
+          bucket: process.env.BUCKET_NAME,
           key: function (req, file, cb) {
               cb(null, Date.now().toString() + '-' + file.originalname);
           }
@@ -40,7 +35,7 @@ exports.createBuyProperty = async (req, res) => {
                 } else {
                     const uploadedFiles = req.files.map(file => {
                         const params = {
-                            Bucket: bucketName,
+                            Bucket: process.env.BUCKET_NAME,
                             Key: file.key
                         };
                         return s3.getSignedUrlPromise('getObject', params).then(url => {
