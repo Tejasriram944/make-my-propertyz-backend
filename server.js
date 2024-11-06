@@ -3,13 +3,19 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { readdirSync } = require('fs');
+const { readdirSync, access } = require('fs');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+// var fs = require('fs');
 const cors = require('cors');
+const AWS = require('aws-sdk')
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+require('dotenv').config();
 
 const app = express();
 
 mongoose
-  .connect('mongodb+srv://matrical:onesalon@matricaltechnologies.rko3e.mongodb.net/Makemypropertyz?retryWrites=true&w=majority&appName=Matricaltechnologies', {
+  .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
